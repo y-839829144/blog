@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客</title>
+    <style type="text/css">
+        .blog{
+            padding: 20px 0px;
+        }
+        .blog .info span{
+            padding-right: 10px;
+        }
+        .blog .summary{
+            padding-top: 20px;
+        }
+        .back{
+            background-image: url({% static 'image/4.gif' %});
+            background-repeat: round;
+        }
+
+    </style>
+    <script type="text/javascript" src={% static 'js/jquery-1.10.2.js' %}>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href=".">
+</head>
+<body class="back">
+<div class="header">
+    <h1 align="center" style="color: aliceblue">我的博客</h1>
+</div>
+{% for blog in blogs %}
+<div align="center" class="blog">
+    <div class="title">
+        <a href="{% url 'blog:blog_get_detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+    </div>
+    <div class="info">
+        <span class="category" style="color: #ff9900; ">{{ blog.category.name }}</span>
+        <span class="author" style="color: #4a86e8;">{{ blog.author }}</span>
+        <span class="pub" style="color: #6aa84e;">{{ blog.pub }}</span>
+
+
+    </div>
+
+
+    <div class="summary" style="color: aliceblue;">
+        {{ blog.content | truncatechars:1000 }}
+    </div>
+</div>
+
+{% endfor %}
+
+</body>
+</html>
